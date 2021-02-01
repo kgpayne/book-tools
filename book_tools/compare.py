@@ -106,5 +106,9 @@ class TFIDF(BaseCompareFeature):
         similarity_matrix.set_index('index', inplace=True)
         pairs = zip(data1[0], data2[0])
         return pd.Series(
-            [similarity_matrix.loc[r, c] for r, c in pairs]
+            [
+                similarity_matrix.loc[r, c]
+                if r and c else None
+                for r, c in pairs
+            ]
         )
